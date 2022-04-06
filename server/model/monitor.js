@@ -7,7 +7,7 @@ dayjs.extend(timezone);
 const axios = require("axios");
 const { Prometheus } = require("../prometheus");
 const { debug, UP, DOWN, PENDING, flipStatus, TimeLogger } = require("../../src/util");
-const { tcping, ping, dnsResolve, checkCertificate, checkStatusCode, getTotalClientInRoom, setting, errorLog } = require("../util-server");
+const { tcping, ping, dnsResolve, grpc, checkCertificate, checkStatusCode, getTotalClientInRoom, setting, errorLog } = require("../util-server");
 const { R } = require("redbean-node");
 const { BeanModel } = require("redbean-node/dist/bean-model");
 const { Notification } = require("../notification");
@@ -368,6 +368,10 @@ class Monitor extends BeanModel {
                         throw new Error("Server not found on Steam");
                     }
 
+                } else if (this.type === "grpc") {
+                    bean.ping = await grpc(this.hostname, this.port, this.keyword);
+                    bean.msg = "";
+                    bean.status = UP;
                 } else {
                     bean.msg = "Unknown Monitor Type";
                     bean.status = PENDING;

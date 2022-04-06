@@ -32,6 +32,9 @@
                                     <option value="steam">
                                         Steam Game Server
                                     </option>
+                                    <option value="grpc">
+                                        gRPC
+                                    </option>
                                 </select>
                             </div>
 
@@ -67,17 +70,24 @@
                             </div>
 
                             <!-- Hostname -->
-                            <!-- TCP Port / Ping / DNS / Steam only -->
-                            <div v-if="monitor.type === 'port' || monitor.type === 'ping' || monitor.type === 'dns' || monitor.type === 'steam'" class="my-3">
+                            <!-- TCP Port / Ping / DNS / Steam / gRPC only -->
+                            <div v-if="monitor.type === 'port' || monitor.type === 'ping' || monitor.type === 'dns' || monitor.type === 'steam' || monitor.type === 'grpc'" class="my-3">
                                 <label for="hostname" class="form-label">{{ $t("Hostname") }}</label>
                                 <input id="hostname" v-model="monitor.hostname" type="text" class="form-control" :pattern="`${ipRegexPattern}|${hostnameRegexPattern}`" required>
                             </div>
 
                             <!-- Port -->
-                            <!-- For TCP Port / Steam Type -->
-                            <div v-if="monitor.type === 'port' || monitor.type === 'steam'" class="my-3">
+                            <!-- For TCP Port / Steam / gRPC Type -->
+                            <div v-if="monitor.type === 'port' || monitor.type === 'steam' || monitor.type === 'grpc'" class="my-3">
                                 <label for="port" class="form-label">{{ $t("Port") }}</label>
                                 <input id="port" v-model="monitor.port" type="number" class="form-control" required min="0" max="65535" step="1">
+                            </div>
+
+                             <!-- Service Method -->
+                             <!-- For gRPC Type only -->
+                            <div v-if="monitor.type === 'grpc'" class="my-3">
+                                <label for="service-method" class="form-label">{{ $t("Service Method") }}</label>
+                                <input id="service-method" v-model="monitor.keyword" type="text" class="form-control" required>
                             </div>
 
                             <!-- DNS Resolver Server -->
