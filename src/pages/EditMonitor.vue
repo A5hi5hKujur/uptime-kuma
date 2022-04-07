@@ -83,13 +83,6 @@
                                 <input id="port" v-model="monitor.port" type="number" class="form-control" required min="0" max="65535" step="1">
                             </div>
 
-                             <!-- Service Method -->
-                             <!-- For gRPC Type only -->
-                            <div v-if="monitor.type === 'grpc'" class="my-3">
-                                <label for="service-method" class="form-label">{{ $t("Service Method") }}</label>
-                                <input id="service-method" v-model="monitor.keyword" type="text" class="form-control" required>
-                            </div>
-
                             <!-- DNS Resolver Server -->
                             <!-- For DNS Type -->
                             <template v-if="monitor.type === 'dns'">
