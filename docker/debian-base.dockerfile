@@ -10,3 +10,9 @@ RUN apt update && \
         sqlite3 iputils-ping util-linux dumb-init && \
     pip3 --no-cache-dir install apprise==0.9.7 && \
     rm -rf /var/lib/apt/lists/*
+
+# Install grpcurl
+# Can be used like ./grpcurl
+RUN wget https://github.com/fullstorydev/grpcurl/releases/download/v1.8.6/grpcurl_1.8.6_linux_x86_64.tar.gz
+RUN tar xf grpcurl_1.8.6_linux_x86_64.tar.gz
+
