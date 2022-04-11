@@ -73,7 +73,6 @@
         "check-password-strength": "^2.0.5",
         "command-exists": "~1.2.9",
         "compare-versions": "~3.6.0",
-        "cypress": "^9.5.3",
         "dayjs": "~1.10.8",
         "express": "~4.17.3",
         "express-basic-auth": "~1.2.1",
