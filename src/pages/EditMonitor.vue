@@ -32,10 +32,8 @@
                                     <option value="steam">
                                         Steam Game Server
                                     </option>
-<<<<<<< HEAD
                                     <option value="grpc">
                                         gRPC
-                                    </option>
                                     <option value="mqtt">
                                         MQTT
                                     </option>
