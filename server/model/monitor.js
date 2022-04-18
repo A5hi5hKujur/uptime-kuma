@@ -414,6 +414,7 @@ class Monitor extends BeanModel {
                     let response = await grpc(this.hostname, this.port);
                     bean.ping = dayjs().valueOf() - startTime; 
                     bean.msg = response;
+                    bean.status = UP;
                 } else if (this.type === "mqtt") {
                     bean.msg = await mqttAsync(this.hostname, this.mqttTopic, this.mqttSuccessMessage, {
                         port: this.port,
