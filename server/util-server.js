@@ -170,6 +170,22 @@ exports.dnsResolve = function (hostname, resolverServer, rrtype) {
     });
 };
 
+exports.grpc = function (hostname, port) {
+    return new Promise((resolve, reject) => {
+        childProcess.exec(`./grpcurl --plaintext ${hostname}:${port} list`, (error, stdout, stderr) => {
+            if (error) {
+                reject(error);
+            }
+
+            if (stderr) {
+                reject(stderr);
+            }
+
+            resolve(stdout);
+        });
+    });
+};
+
 exports.setting = async function (key) {
     let value = await R.getCell("SELECT `value` FROM setting WHERE `key` = ? ", [
         key,
