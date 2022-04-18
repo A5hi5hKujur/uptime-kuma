@@ -1,7 +1,7 @@
 const { R } = require("redbean-node");
-const { checkLogin, setSettings, setSetting } = require("../util-server");
+const { checkLogin, setSetting } = require("../util-server");
 const dayjs = require("dayjs");
-const { debug } = require("../../src/util");
+const { log } = require("../../src/util");
 const ImageDataURI = require("../image-data-uri");
 const Database = require("../database");
 const apicache = require("../modules/apicache");
@@ -155,6 +155,9 @@ module.exports.statusPageSocketHandler = (socket) => {
             //statusPage.search_engine_index = ;
             statusPage.show_tags = config.showTags;
             //statusPage.password = null;
+            statusPage.footer_text = config.footerText;
+            statusPage.custom_css = config.customCSS;
+            statusPage.show_powered_by = config.showPoweredBy;
             statusPage.modified_date = R.isoDateTime();
 
             await R.store(statusPage);
@@ -202,8 +205,8 @@ module.exports.statusPageSocketHandler = (socket) => {
                 group.id = groupBean.id;
             }
 
-            // Delete groups that not in the list
-            debug("Delete groups that not in the list");
+            // Delete groups that are not in the list
+            log.debug("socket", "Delete groups that are not in the list");
             const slots = groupIDList.map(() => "?").join(",");
 
             const data = [
@@ -226,7 +229,7 @@ module.exports.statusPageSocketHandler = (socket) => {
             });
 
         } catch (error) {
-            console.error(error);
+            log.error("socket", error);
 
             callback({
                 ok: false,
