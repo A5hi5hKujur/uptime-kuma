@@ -172,7 +172,7 @@ exports.dnsResolve = function (hostname, resolverServer, rrtype) {
 
 exports.grpc = function (hostname, port) {
     return new Promise((resolve, reject) => {
-        child_process.exec(`./grpcurl --plaintext ${hostname}:${port} list`, (error, stdout, stderr) => {
+        childProcess.exec(`./grpcurl --plaintext ${hostname}:${port} list`, (error, stdout, stderr) => {
             if (error) {
                 reject(error);
             }
