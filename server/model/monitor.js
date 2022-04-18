@@ -6,13 +6,8 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 const axios = require("axios");
 const { Prometheus } = require("../prometheus");
-<<<<<<< HEAD
-const { debug, UP, DOWN, PENDING, flipStatus, TimeLogger } = require("../../src/util");
-const { tcping, ping, dnsResolve, grpc, checkCertificate, checkStatusCode, getTotalClientInRoom, setting, errorLog } = require("../util-server");
-=======
 const { log, UP, DOWN, PENDING, flipStatus, TimeLogger } = require("../../src/util");
-const { tcping, ping, dnsResolve, checkCertificate, checkStatusCode, getTotalClientInRoom, setting, errorLog, mqttAsync } = require("../util-server");
->>>>>>> master
+const { tcping, ping, dnsResolve, checkCertificate, checkStatusCode, getTotalClientInRoom, setting, errorLog, mqttAsync, grpc } = require("../util-server");
 const { R } = require("redbean-node");
 const { BeanModel } = require("redbean-node/dist/bean-model");
 const { Notification } = require("../notification");
@@ -413,14 +408,12 @@ class Monitor extends BeanModel {
                     } else {
                         throw new Error("Server not found on Steam");
                     }
-<<<<<<< HEAD
 
                 } else if (this.type === "grpc") {
                     let startTime = dayjs().valueOf();
                     let response = await grpc(this.hostname, this.port);
                     bean.ping = dayjs().valueOf() - startTime; 
                     bean.msg = response;
-=======
                 } else if (this.type === "mqtt") {
                     bean.msg = await mqttAsync(this.hostname, this.mqttTopic, this.mqttSuccessMessage, {
                         port: this.port,
@@ -428,7 +421,6 @@ class Monitor extends BeanModel {
                         password: this.mqttPassword,
                         interval: this.interval,
                     });
->>>>>>> master
                     bean.status = UP;
                 } else {
                     bean.msg = "Unknown Monitor Type";
