@@ -35,7 +35,7 @@
 <<<<<<< HEAD
                                     <option value="grpc">
                                         gRPC
-=======
+                                    </option>
                                     <option value="mqtt">
                                         MQTT
                                     </option>
